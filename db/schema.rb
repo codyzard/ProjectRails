@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_133415) do
+ActiveRecord::Schema.define(version: 2019_04_04_145000) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 2019_04_02_133415) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "target_id"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_follows_on_user_id"
+  end
+
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "book_id"
@@ -84,6 +93,16 @@ ActiveRecord::Schema.define(version: 2019_04_02_133415) do
     t.index ["book_id"], name: "index_rates_on_book_id"
     t.index ["user_id", "book_id"], name: "index_rates_on_user_id_and_book_id", unique: true
     t.index ["user_id"], name: "index_rates_on_user_id"
+  end
+
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -112,6 +131,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_133415) do
   add_foreign_key "books", "authors"
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
+  add_foreign_key "follows", "users"
   add_foreign_key "likes", "books"
   add_foreign_key "likes", "users"
   add_foreign_key "rates", "books"

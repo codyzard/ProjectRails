@@ -54,7 +54,24 @@ class UsersController < ApplicationController
     flash[:success] = "User delected"
     redirect_to users_url
   end
+  
+  def find_user
+    @user = User.find_by id: params[:id]
+  end
 
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.page params[:page]
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.page params[:page]
+    render 'show_follow' 
+  end
 
   private
 
@@ -62,7 +79,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confrimation) 
   end
 
-  def find_user
-    @user = User.find_by id: params[:id]
+  def admin_user
+    redirect_to(root_url) unless current_user.role==1?
   end
+  
 end

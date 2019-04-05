@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
+  get 'help'  =>  'static_pages#help'
+  
   get 'sessions/new'
-  root 'users#index'
+  # get  'users/index'
   
   get '/users/:id' => 'users#show', as: :user
   # get 'users/new'
@@ -13,8 +16,13 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   
   
-  resources :users 
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
    
   get '/search' => 'pages#search', :as => 'search_page'
-
+  
+  resources :relationships, only: [:create, :destroy] 
 end
