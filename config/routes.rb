@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   get 'sessions/new'
   # get  'users/index'
   
-  get '/users/:id' => 'users#show', as: :user
-  # get 'users/new'
-  get '/users/:id/edit' => 'users#edit'
+  # get '/users/:id' => 'users#show', as: :user
+  # # get 'users/new'
+  # get '/users/:id/edit' => 'users#edit'
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
   

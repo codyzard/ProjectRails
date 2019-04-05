@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def admin_user
-    redirect_to(root_url) unless current_user.role==1?
+    redirect_to(root_url) unless current_user.role=1
   end
   
 end
