@@ -12,6 +12,12 @@
     <dt>Publisher:</dt><dd><%= @book.publisher %></dd><br>
     <dt>Page:</dt><dd><%= @book.page %></dd><br>
     <dt>Quantity:</dt><dd><%= @book.quantity %></dd><br>
+    Quality  : <%= rating_for @book, "quality", star: 5, disable_afer_rate: true %>
   </dl>
+  <aside>
+      <section>
+           <%= render  'comments/form' %>  
+      </section>
+  </aside>
 	
 </div>

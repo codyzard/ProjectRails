@@ -13,7 +13,9 @@ class BooksController < ApplicationController
 	end
 
 	
-	def show;end
+	def show
+		@comment = Comment.new
+	end
 
 	def edit; end
 

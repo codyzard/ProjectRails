@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
 
+	ratyrate_rateable "quality"
 	belongs_to :author
 	#ManytoMany Book_Category
 	has_many :bookcategories, dependent: :destroy
@@ -11,6 +12,9 @@ class Book < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	#ManytoMany Book_Requested_User
 	has_many :requests, dependent: :destroy
+    #ManytoMany Comment
+	has_many :comments, dependent: :destroy
+
 	validates :name, presence: true, length: { maximum: 50 }
 	validates :quantity, presence: true, length: { maximum: 1000 }
 

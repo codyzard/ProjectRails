@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :comments
+  post '/rate' => 'rater#create', :as => 'rate'
 	root 'static_pages#home'
   	get 'help'  =>  'static_pages#help'
 
@@ -15,7 +17,8 @@ Rails.application.routes.draw do
 	resources :users do
     	member do
     		get :following, :followers
-    	end
+			end
+			resources :create_comment
   	end
   	get '/users/:id/edit' => 'users#edit'
 	get '/signup' => 'users#new'
@@ -23,8 +26,12 @@ Rails.application.routes.draw do
 
 	resources :relationships, only: [:create, :destroy] 
 
-  resources :books
+	resources :books do
+		resources :comments
+		resources :user_reviews
+	end
   # resources :categories
   root 'books#index'
-  
+	
+
 end

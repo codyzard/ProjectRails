@@ -1,0 +1,8 @@
+<h3>post_comment</h3>
+  <p>
+    <%= form_for(@comment) do |f| %>
+     <%= f.text_area :content %>
+     <%= f.submit "post", class: "btn btn-primary" %>
+    <% end %>
+</p>
+
