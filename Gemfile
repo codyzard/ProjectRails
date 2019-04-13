@@ -16,6 +16,7 @@ gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'ransack' #gem search
 gem 'to_xls-rails' #export excel
 gem 'sassc-rails', '>= 2.1.0'
+gem 'jquery-turbolinks'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -24,6 +25,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails', '4.3.1'
+gem 'ratyrate'
 #them gem
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

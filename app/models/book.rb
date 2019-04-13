@@ -2,6 +2,9 @@ class Book < ApplicationRecord
 
 	belongs_to :author
 	#ManytoMany Book_Category
+
+    ratyrate_rateable "quality"
+
 	has_many :bookcategories, dependent: :destroy
 	has_many :categories, through: :bookcategories	#, source: :category
 	accepts_nested_attributes_for :bookcategories, allow_destroy: true
@@ -14,7 +17,10 @@ class Book < ApplicationRecord
 	#Many to Many Poly Follow book, author
 	has_many :follows, as: :target, dependent: :destroy
 
+	has_many :comments, dependent: :destroy
+
 	validates :name, presence: true, length: { maximum: 50 }
 	validates :quantity, presence: true, length: { maximum: 1000 }
-
+	
+	
 end

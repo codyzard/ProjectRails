@@ -38,7 +38,7 @@ authors.each do |author|
 	author.books.create!(name: name, quantity: quantity, publisher: publisher,page: page)
 end
 
-Category
+# Category
 categories = ["Textbook","Novel", "Manga","History", "Scientist", "Politic", "Cultural", "Computer", "Technical", "Geography"]
 categories.each do |category|
 	Category.create!(name: category)
@@ -48,7 +48,7 @@ end
 
 books = Book.all
 books.each do |book|
-  book.categories_book  << Category.all[rand(10)]
+  book.categories  << Category.all[rand(10)]
 end
 
 #LikeBookUser

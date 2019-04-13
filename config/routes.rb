@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  post '/rate' => 'rater#create', :as => 'rate'
 	root 'static_pages#home'
   	get 'help'  =>  'static_pages#help'
 	get    '/login',   to: 'sessions#new'
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   	resources :relationships, only: [:create, :destroy] 
     resources :follows, only: [:create, :destroy]
 
-
+	resources :books
+	resources :comments
   
 end

@@ -12,10 +12,30 @@
     <dt>Publisher:</dt><dd><%= @book.publisher %></dd><br>
     <dt>Page:</dt><dd><%= @book.page %></dd><br>
     <dt>Quantity:</dt><dd><%= @book.quantity %></dd><br>
-  </dl>
-	<% if current_user.role ==1 && !current_user?(@user) %>
-	   <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
-     <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
-  <% end %>
-  <%= render 'follow_book_form' if logged_in? %>
+    
+    <%= link_to("Add Comment", new_comment_path(book_id: @book.id)) %>
+    <%# <%= link_to("Edit Comment", edit_comment_path(book_id: @book.id, comment_id: @comment.id)) %> %>
 </div>
+
+<div class = "Content_comment">
+    <h2>Comment</h3>
+     
+    <h3><% @book.comments.each do |c| %></h2>
+    Quality  : <%= rating_for @book, "quality", star: 5, disable_after_rate: false %>
+    <h4>From - <%= link_to c.user.name, c %></h4>
+    <p class="comment"><%= c.content %> </p>
+    <p> posted at <%= c.created_at%></p>
+    </br>
+    <%# <%= link_to("Edit Comment", edit_comment_path(c)) %> %>
+    </br>
+     <%= link_to("Delete Comment", comment_path(c), method: :delete ) %> 
+    <hr>
+<% end %>
+</div>
+
+
+</div>
+  </dl>
+
+ 
+ 

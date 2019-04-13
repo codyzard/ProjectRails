@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
 	attr_accessor :remember_token
 	before_save { self.email = email.downcase }
+	
+	ratyrate_rater
 
 	#ManytoMany User_Like_Book
 	has_many :likes, dependent: :destroy
@@ -28,6 +30,7 @@ class User < ApplicationRecord
 	has_many :following_books, through: :follows, source: :target, :source_type => 'Book'
 	has_many :following_authors, through: :follows, source: :target, :source_type => 'Author'
 
+	has_many :comments, dependent: :destroy
 
 	#Validate
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

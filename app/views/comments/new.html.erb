@@ -1,0 +1,9 @@
+<div id="comment-form">
+    <%= form_for @comment do |f| %>
+    Quality  : <%= rating_for @book, "quality", star: 5, disable_after_rate: false %>
+        <%= f.label :content %>
+        <%= f.text_area :content, class: "text-area" %>
+        <%= f.hidden_field :book_id %>
+        <%= f.submit %>
+    <% end %>
+</div>
