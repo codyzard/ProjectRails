@@ -5,6 +5,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.integer :quantity
       t.string :publisher
       t.integer :page
+      t.float :point
       t.references :author, foreign_key: true
      
 

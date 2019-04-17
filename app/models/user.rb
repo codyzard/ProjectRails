@@ -28,7 +28,8 @@ class User < ApplicationRecord
 	has_many :follows, dependent: :destroy
 	has_many :following_books, through: :follows, source: :target, :source_type => 'Book'
 	has_many :following_authors, through: :follows, source: :target, :source_type => 'Author'
-
+	
+	has_many :reviews, dependent: :destroy
 
 	#Validate
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

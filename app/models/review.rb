@@ -1,12 +1,10 @@
 class Review < ApplicationRecord
+    belongs_to :user
+    belongs_to :book
 
-	belongs_to :user
-	belongs_to :book
-	validates :user_id, presence: true
-	validates :book_id, presence: true
-	validates :rating, numericality: { only_integer: true, 
-	 								less_than_or_equal_to: 5,
-	 								greater_than_or_equal_to: 1}
-    validates :content, length: {maximum: 200}
+    validates :user_id, presence: true
+    validates :book_id, presence: true, uniqueness: { scope: :user_id }
 
+    validates :rating, presence: true
+    validates :comment, length: {maximum: 500}
 end

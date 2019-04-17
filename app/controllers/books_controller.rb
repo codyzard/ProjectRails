@@ -13,7 +13,19 @@ class BooksController < ApplicationController
 	end
 
 	
-	def show;end
+	def show
+		@reviews = Review.where(book_id: @book_id).order("created_at DESC")
+	# 	if @reviews.blank?
+	# 		@avg_review = 0
+	# 	else
+	# 		@avg_review = @reviews.average(:rating).round(2)
+	#   end
+		if @reviews.blank?
+			@book.point = 0
+		else
+			@book.point = @book.reviews.average(:rating).round(2)	
+        end
+	end
 
 	def edit; end
 
@@ -51,7 +63,7 @@ class BooksController < ApplicationController
 	private
 
 	def book_params
-		params.require(:book).permit(:name, :quantity, :publisher, 
+		params.require(:book).permit(:name, :quantity, :publisher, :rating, 
 			:page, :author_id, :book_img,  
 			bookcategories_attributes: [:category_id,:_destroy])	
 	end

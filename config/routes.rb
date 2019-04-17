@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :reviews
 	root 'static_pages#home'
 	get 'help'  =>  'static_pages#help'
 	get    '/login',   to: 'sessions#new'
@@ -10,8 +11,10 @@ Rails.application.routes.draw do
 	post '/signup' => 'users#create'
 	resources :categories
 	resources :authors
+	
 	resources :books do
 		resources :request_details
+		resources :reviews, except: [:show, :index]
 	end
 	#User
 	resources :users do
@@ -36,6 +39,7 @@ Rails.application.routes.draw do
   	end
 	resources :relationships, only: [:create, :destroy] 
 	resources :follows, only: [:create, :destroy]
-
+	
+	
   
 end

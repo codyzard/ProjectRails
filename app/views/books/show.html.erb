@@ -2,10 +2,13 @@
 <div class ="row" style="padding-top: 30px;">
   <div class = "col-md-4">
     <%= image_tag @book.book_img.url(:book_show), class: "book-show"%>
+   
   </div>
    
   <div class="col-md-8">
     <h3>Title: <%= @book.name %></h3>
+    
+    
     <h3>Author: <%= link_to @book.author.name, @book.author %></h3>
     <h3>
       Category: <% @book.categories.each do |c|%>
@@ -15,10 +18,22 @@
     <h3>Publisher: <%= @book.publisher %> </h33>
     <h3>Page: <%= @book.page %></h3>
     <h3>Quantity: <%= @book.quantity %> </h3>
+    <h3>Rating:</h3>
+    <% if @book.reviews.blank?%>
+    <div class= "star-rating" data-score= <%= 0  %> ></div>
+    <em><%= "#{@book.reviews.length} reviews" %></em>
+    <% else%>
+     <%# <div class="star-rating" data-score= <%= @book.reviews.average(:rating).round(2) %>  
+	   <div class= "star-rating" data-score= <%= @book.reviews.average(:rating).round(2)  %> ></div>
+     <em><%= "#{@book.reviews.length} reviews" %></em>
+    <% end %> 
+    </br>
     <% if logged_in? && current_user.role ==1 && !current_user?(@user) %>
        <%= link_to "Edit", edit_book_path(@book), class: "btn btn-primary edit" %>
        <%= link_to "Delete", @book, method: :delete, data: { confirm: "You sure?", remote: true },class: "delete_book btn btn-primary delete " %>
     <% end %>
+
+    
     <% if logged_in? %>
       <div class="borrow">
           <%= link_to "Borrow", new_book_request_detail_path(@book), class: "btn btn-primary borrow"%>
@@ -28,6 +43,33 @@
     <div>
       <%= render 'follow_book_form' if logged_in? %>
     </div>
+    
+ 
+    <%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-danger" %>
+  </div>
+  <div class="col-md-7 col-md-offset-1">
+          <% @book.reviews.each do |r| %>
+            <div class = "reviews" >
+              <div class="star-rating" data-score= <%= r.rating %></div>
+              <%= link_to r.user.name, r%>
+              <p><%= r.comment %></p></br>
+              <% if logged_in? && !current_user?(@user) %>
+              <p><%= link_to "Edit review", edit_review_path(r),class: "btn btn-primary"  %> </p>
+              
+              <% end %>
+              </br>
+            </div>
+          <% end %>    
   </div>
 </div>
+
+<script>
+	$('.star-rating').raty({
+	    path: '/assets/',
+	    readOnly: true,
+	    score: function() {
+	      return $(this).attr('data-score');
+	    }
+	});
+</script>
 	
