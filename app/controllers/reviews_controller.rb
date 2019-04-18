@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/1
   # GET /reviews/1.json
   def show
+    @user = User.find_by(id: @user_id )
   end
 
   # GET /reviews/new
@@ -61,11 +62,10 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1
   # DELETE /reviews/1.json
   def destroy
+    @review = Review.find(params[:id])
     @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @book  = Book.find(@review.book_id)
+    redirect_to @book
   end
 
   private

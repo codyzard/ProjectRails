@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 	
 	resources :books do
 		resources :request_details
-		resources :reviews, except: [:show, :index]
+		resources :reviews
+		# , except: [:show, :index]
 	end
 	#User
 	resources :users do
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
   	end
 	resources :relationships, only: [:create, :destroy] 
 	resources :follows, only: [:create, :destroy]
-	
+
 	
   
 end

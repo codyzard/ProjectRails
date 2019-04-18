@@ -433,8 +433,8 @@ ul{
   width: 70px;
 }
 
-.star-rating
-{
+// .star-rating
+// {
   // display: block; 
   // width: 100%; 
   // background: blanchedalmond; 
@@ -445,5 +445,23 @@ ul{
   // -webkit-box-shadow: 1px 1px 1px $gray-medium-light;
   // -moz-box-shadow: 1px 1px 1px $gray-medium-light;
   // box-shadow: 1px 1px 1px $gray-medium-light;
+// }
+.star-rating
+{
+   border-bottom: 1px solid rgba(0,0,0,.09);
+   padding: 1rem 0;
+   padding-left: 1.25rem;
+   img
+   {
+     margin-top: .375rem;
+   }
 }
 
+
+
+
+// #comment {
+//  font: Helvetica;
+//  border-bottom: 1px solid #ccc;
+//  padding: 5px;
+// }
